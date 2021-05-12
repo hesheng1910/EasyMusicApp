@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">EasyMusicApp</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Easy Music</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Tất cả bài hát</string>
+    <string name="menu_favourites">Bài Hát Yêu Thích</string>
+    <string name="menu_setting">Cài đặt</string>
+    <string name="song_title_example">Muon Roi Ma Sao Con</string>
+    <string name="artist_example">Son Tung MTP</string>
+    <string name="todo">todosomething</string>
+    <string name="you_do_not_have_any_songs">Bạn không có bài hát nào</string>
+    <string name="now_playing">Now Playing</string>
+    <string name="sort_by_date_newest">Thời gian thêm vào (Mới nhất)</string>
+    <string name="sort_by_date_oldest">Thời gian thêm vào (Cũ Nhất)</string>
+    <string name="sort_by_name_a_z">Tên bài hát (A-Z)</string>
+    <string name="sort_by_name_z_a">Tên bài hát (Z-A)</string>
+    <string name="icon_music">icon_music</string>
 </resources>
