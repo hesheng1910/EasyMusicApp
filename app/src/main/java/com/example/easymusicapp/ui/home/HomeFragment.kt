@@ -23,7 +23,6 @@ class HomeFragment : Fragment() {
 
     private lateinit var nowPlayingButtonBar: RelativeLayout
     private lateinit var playPauseButton: ImageButton
-    private lateinit var songTitle: TextView
     private lateinit var noSongs: RelativeLayout
     private lateinit var visibleLayout: RelativeLayout
     private lateinit var recyclerView: RecyclerView
@@ -43,7 +42,6 @@ class HomeFragment : Fragment() {
         nowPlayingButtonBar = root.findViewById(R.id.hiddenBarMainScreen)
         playPauseButton = root.findViewById(R.id.playPauseButton)
         recyclerView = root.findViewById(R.id.mainRecycleView)
-
         return root
     }
 
@@ -51,14 +49,14 @@ class HomeFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         getSongsList = getLocalSongs()
 
-        if (getSongsList.size == 0) {
+        if (getSongsList.size == 0) {           // Check null
             visibleLayout.visibility = View.INVISIBLE
             noSongs.visibility = View.VISIBLE
         } else {
             songAdapter = SongAdapter(getSongsList, myActivity as Context)
-            val layoutManager = LinearLayoutManager(myActivity)
+            val layoutManager = LinearLayoutManager(myActivity)     // Init the layout of recyclerView
             recyclerView.layoutManager = layoutManager
-            recyclerView.itemAnimator = DefaultItemAnimator()
+            recyclerView.itemAnimator = DefaultItemAnimator()       // Set up item animator is default
             recyclerView.adapter = songAdapter
 
         }
@@ -79,47 +77,53 @@ class HomeFragment : Fragment() {
         inflater.inflate(R.menu.main, menu)
         return
     }
+    // Event handle click menu item
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val switcher = item.itemId
-        if (switcher == R.id.action_sort_by_name_a_z) {
-            if (getSongsList.size != 0) {
-                Collections.sort(getSongsList, Song.nameComparator)
+        when (item.itemId) {
+            R.id.action_sort_by_name_a_z -> {
+                if (getSongsList.size != 0) {
+                    Collections.sort(getSongsList, Song.sortNameAZComparator)
+                }
+                songAdapter.notifyDataSetChanged()      // Notify Data of Adapter Set Has Changed
+                return true
             }
-            songAdapter.notifyDataSetChanged()
-            return false
-        } else if (switcher == R.id.action_sort_by_name_z_a) {
-            if (getSongsList.size != 0) {
-                Collections.sort(getSongsList, Song.dateComparator)
+            R.id.action_sort_by_name_z_a -> {
+                if (getSongsList.size != 0) {
+                    Collections.sort(getSongsList, Song.sortNameZAComparator)
+                }
+                songAdapter.notifyDataSetChanged()
+                return true
             }
-            songAdapter.notifyDataSetChanged()
-            return false
-        } else if (switcher == R.id.action_sort_by_date_newest) {
-            if (getSongsList.size != 0) {
-                Collections.sort(getSongsList, Song.dateComparator)
+            R.id.action_sort_by_date_newest -> {
+                if (getSongsList.size != 0) {
+                    Collections.sort(getSongsList, Song.sortDateNewestComparator)
+                }
+                songAdapter.notifyDataSetChanged()
+                return true
             }
-            songAdapter.notifyDataSetChanged()
-            return false
-        } else if (switcher == R.id.action_sort_by_date_oldest) {
-            if (getSongsList.size != 0) {
-                Collections.sort(getSongsList, Song.dateComparator)
+            R.id.action_sort_by_date_oldest -> {
+                if (getSongsList.size != 0) {
+                    Collections.sort(getSongsList, Song.sortDateOldestComparator)
+                }
+                songAdapter.notifyDataSetChanged()
+                return true
             }
-            songAdapter.notifyDataSetChanged()
-            return false
+            else -> return super.onOptionsItemSelected(item)
         }
-        return super.onOptionsItemSelected(item)
     }
-
+    // Get Song From Current Phone
     private fun getLocalSongs(): ArrayList<Song> {
         val listSong = ArrayList<Song>()
         val contentResolver = myActivity.contentResolver
-        val collection = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
-        val projection = arrayOf(
+        val collection = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI        // Get Content Uri
+        val projection = arrayOf(                                           // Init Projection include some fields we need
                 MediaStore.Audio.Media._ID,
                 MediaStore.Audio.Media.TITLE,
                 MediaStore.Audio.Media.ARTIST,
                 MediaStore.Audio.Media.DATE_ADDED,
                 MediaStore.Audio.Media.DATA
         )
+        // Execute query
         val query = contentResolver?.query(collection,projection,null,null,null)
 
         query?.use {
