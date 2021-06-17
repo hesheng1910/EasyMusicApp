@@ -1,14 +1,17 @@
 package com.example.easymusicapp.adapters
 
 import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.easymusicapp.R
 import com.example.easymusicapp.entity.Song
+import com.example.easymusicapp.ui.songplaying.SongPlayingFragment
 
 class SongAdapter(_listSong: ArrayList<Song>, _context: Context) : RecyclerView.Adapter<SongAdapter.ViewHolder>() {
 
@@ -35,6 +38,20 @@ class SongAdapter(_listSong: ArrayList<Song>, _context: Context) : RecyclerView.
         holder.artist.text = songObject.artist
         holder.contentItem.setOnClickListener {
 
+                val songPlayingFragment = SongPlayingFragment()
+                val args = Bundle()
+                args.putString("songArtist", songObject.artist)
+                args.putString("path", songObject.songData)
+                args.putString("songTitle", songObject.songTitle)
+                args.putInt("songId", songObject.songID?.toInt() as Int)
+                args.putInt("songPosition",position)
+                args.putParcelableArrayList("songData", listSong)
+                songPlayingFragment.arguments = args
+                (context as FragmentActivity).supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.nav_host_fragment, songPlayingFragment)
+                        .addToBackStack("SongPlayingFragment")
+                        .commit()
         }
     }
     // Get  quantity item

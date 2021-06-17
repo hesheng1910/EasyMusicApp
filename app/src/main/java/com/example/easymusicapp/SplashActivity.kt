@@ -51,7 +51,7 @@ class SplashActivity : AppCompatActivity() {
                         this.finish()
                     }, 1000)
                 } else {
-                    Toast.makeText(this@SplashActivity, "Lỗi. Không đủ các quyền", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@SplashActivity, "Lỗi. Không đủ quyền", Toast.LENGTH_SHORT).show()
                     this.finish()
                 }
                 return

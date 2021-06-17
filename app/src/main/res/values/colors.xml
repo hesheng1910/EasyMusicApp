@@ -7,4 +7,16 @@
     <color name="teal_700">#1CBBB4</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="first">#074A5A</color>
+    <color name="second">#06889E</color>
+    <color name="third">#05AEBD</color>
+    <color name="fourth">#01FBFB</color>
+    <array name="rainbow">
+
+        <item>@color/first</item>
+        <item>@color/second</item>
+        <item>@color/third</item>
+        <item>@color/fourth</item>
+
+    </array>
 </resources>

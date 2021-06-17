@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/nav_setting"
-        android:name="com.example.easymusicapp.ui.setting.SettingFragment"
+        android:name="com.example.easymusicapp.ui.songplaying.SongPlayingFragment"
         android:label="@string/menu_setting"
         tools:layout="@layout/fragment_setting" />
 </navigation>

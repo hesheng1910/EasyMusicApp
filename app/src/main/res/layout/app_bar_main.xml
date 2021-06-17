@@ -5,21 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/Theme.EasyMusicApp.AppBarOverlay">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/teal_700"
-            app:popupTheme="@style/Theme.EasyMusicApp.PopupOverlay" />
+            android:layout_height="wrap_content"
+            android:theme="@style/Theme.EasyMusicApp.AppBarOverlay">
 
-    </com.google.android.material.appbar.AppBarLayout>
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/teal_700"
+                app:popupTheme="@style/Theme.EasyMusicApp.PopupOverlay" />
+
+        </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_main" />
+
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
