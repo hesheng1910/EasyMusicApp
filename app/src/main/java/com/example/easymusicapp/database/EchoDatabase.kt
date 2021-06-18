@@ -1,5 +1,6 @@
 package com.example.easymusicapp.database
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -20,6 +21,7 @@ class EchoDatabase : SQLiteOpenHelper {
         val COLUMN_SONG_PATH = "SongPath"
     }
 
+    @SuppressLint("SQLiteString")
     override fun onCreate(sqliteDatabase: SQLiteDatabase?) {
         sqliteDatabase?.execSQL("CREATE TABLE " + Staticated.TABLE_NAME + " ( " + Staticated.COLUMN_ID + " INTEGER, " +
                 Staticated.COLUMN_SONG_ARTIST + " STRING, " + Staticated.COLUMN_SONG_TITLE + " STRING, " +

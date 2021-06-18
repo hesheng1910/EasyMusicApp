@@ -43,7 +43,7 @@ class SongAdapter(_listSong: ArrayList<Song>, _context: Context) : RecyclerView.
                 args.putString("songArtist", songObject.artist)
                 args.putString("path", songObject.songData)
                 args.putString("songTitle", songObject.songTitle)
-                args.putInt("songId", songObject.songID?.toInt() as Int)
+                args.putInt("songId", songObject.songID.toInt() as Int)
                 args.putInt("songPosition",position)
                 args.putParcelableArrayList("songData", listSong)
                 songPlayingFragment.arguments = args

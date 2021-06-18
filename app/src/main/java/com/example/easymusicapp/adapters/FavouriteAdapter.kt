@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.easymusicapp.R
 import com.example.easymusicapp.entity.Song
+import com.example.easymusicapp.ui.songplaying.SongPlayingFragment
 
 class FavouriteAdapter(_songDetails: ArrayList<Song>, _context: Context)
     : RecyclerView.Adapter<FavouriteAdapter.MyViewHolder>() {
@@ -28,20 +29,20 @@ class FavouriteAdapter(_songDetails: ArrayList<Song>, _context: Context)
         p0.trackTitle?.text = songObject?.songTitle
         p0.trackArtist?.text = songObject?.artist
         p0.contentHolder?.setOnClickListener {
-//            val songPlayingFragment = SongPlayingFragment()
+            val songPlayingFragment = SongPlayingFragment()
             val args = Bundle()
             args.putString("songArtist", songObject?.artist)
             args.putString("path", songObject?.songData)
             args.putString("songTitle", songObject?.songTitle)
             args.putInt("songId", songObject?.songID?.toInt() as Int)
             args.putInt("songPosition", p1)
-//            args.putParcelableArrayList("songData", songDetails)
-//            songPlayingFragment.arguments = args
-//            (mContext as FragmentActivity).supportFragmentManager
-//                    .beginTransaction()
-//                    .replace(R.id.details_fragment, songPlayingFragment)
-//                    .addToBackStack("SongPlayingFragmentFavourite")
-//                    .commit()
+            args.putParcelableArrayList("songData", songDetails)
+            songPlayingFragment.arguments = args
+            (mContext as FragmentActivity).supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.nav_host_fragment, songPlayingFragment)
+                    .addToBackStack("SongPlayingFragmentFavourite")
+                    .commit()
         }
     }
 
@@ -64,12 +65,12 @@ class FavouriteAdapter(_songDetails: ArrayList<Song>, _context: Context)
         var trackTitle: TextView? = null
         var trackArtist: TextView? = null
         var contentHolder: RelativeLayout? = null
-//
-//        init {
-//            trackTitle = view.findViewById<TextView>(R.id.trackTitle)
-//            trackArtist = view.findViewById<TextView>(R.id.trackArtist)
-//            contentHolder = view.findViewById<RelativeLayout>(R.id.contentRow)
-//        }
+
+        init {
+            trackTitle = view.findViewById(R.id.songTitle)
+            trackArtist = view.findViewById(R.id.songArtist)
+            contentHolder = view.findViewById(R.id.contentRow)
+        }
     }
 
 
