@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.easymusicapp.R
+import com.example.easymusicapp.adapters.FavouriteAdapter
 import com.example.easymusicapp.entity.Song
 import com.example.easymusicapp.adapters.SongAdapter
 import java.util.*
@@ -92,6 +93,7 @@ class HomeFragment : Fragment() {
                     Collections.sort(getSongsList, Song.sortNameZAComparator)
                 }
                 songAdapter.notifyDataSetChanged()
+
                 return true
             }
             R.id.action_sort_by_date_newest -> {
@@ -99,6 +101,7 @@ class HomeFragment : Fragment() {
                     Collections.sort(getSongsList, Song.sortDateNewestComparator)
                 }
                 songAdapter.notifyDataSetChanged()
+
                 return true
             }
             R.id.action_sort_by_date_oldest -> {

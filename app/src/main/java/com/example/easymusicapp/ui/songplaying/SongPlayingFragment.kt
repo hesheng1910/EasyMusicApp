@@ -27,8 +27,10 @@ import java.util.concurrent.TimeUnit
 
 class SongPlayingFragment : Fragment() {
 
-    lateinit var myActivity: Activity
+
     lateinit var mediaPlayer: MediaPlayer
+    lateinit var currentSong: CurrentSong
+    lateinit var myActivity: Activity
     lateinit var startTimeText: TextView
     lateinit var endTimeText: TextView
     lateinit var playPauseImageButton: ImageButton
@@ -41,21 +43,19 @@ class SongPlayingFragment : Fragment() {
     lateinit var songTitleView: TextView
     var currentPosition: Int = 0
     lateinit var fetchSongs: ArrayList<Song>
-    lateinit var currentSong: CurrentSong
     lateinit var audioVisualization: AudioVisualization
     lateinit var glView: GLAudioVisualizationView
     lateinit var fab: ImageButton
     lateinit var favouriteContent: EchoDatabase
-    var updateSongTime = object : Runnable {
+    private var updateSongTime = object : Runnable {
         override fun run() {
-                val getCurrent = mediaPlayer.currentPosition
-            startTimeText.text = String.format("%d:%d",
+            val getCurrent = mediaPlayer.currentPosition
+            seekBar.progress = getCurrent
+            startTimeText.text = String.format("%02d:%02d",
                     TimeUnit.MILLISECONDS.toMinutes(getCurrent.toLong()),
                     TimeUnit.MILLISECONDS.toSeconds(getCurrent.toLong()) -
-                            TimeUnit.MILLISECONDS.toSeconds(TimeUnit.MILLISECONDS.toMinutes(getCurrent.toLong())))
+                            TimeUnit.MILLISECONDS.toSeconds(TimeUnit.MILLISECONDS.toMinutes(getCurrent.toLong()))  - 60 * TimeUnit.MILLISECONDS.toMinutes(getCurrent.toLong()))
                 Handler().postDelayed(this, 1000)
-
-
             }
         }
     
@@ -98,7 +98,7 @@ class SongPlayingFragment : Fragment() {
 
     private fun updateTextViews(songTitle: String, songArtist: String) {
             var songTitleUpdated = songTitle
-            var songArtistUpdated = songTitle
+            var songArtistUpdated = songArtist
             if (songTitle.equals("<unknown>", true)) {
                 songTitleUpdated = "unknown"
             }
@@ -112,16 +112,17 @@ class SongPlayingFragment : Fragment() {
     private fun processInformation(mediaPlayer: MediaPlayer) {
             val finalTime = mediaPlayer.duration
             val startTime = mediaPlayer.currentPosition
-            seekBar.max = finalTime
-        startTimeText.text = String.format("%d:%d",
+        seekBar.max = finalTime
+        seekBar.progress = startTime
+        startTimeText.text = String.format("%02d:%02d",
                 TimeUnit.MILLISECONDS.toMinutes(startTime.toLong()),
                 TimeUnit.MILLISECONDS.toSeconds(startTime.toLong()) -
-                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(startTime.toLong())))
-        endTimeText.text = String.format("%d:%d",
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(startTime.toLong())) - 60 * TimeUnit.MILLISECONDS.toMinutes(startTime.toLong()))
+        endTimeText.text = String.format("%02d:%02d",
                 TimeUnit.MILLISECONDS.toMinutes(finalTime.toLong()),
                 TimeUnit.MILLISECONDS.toSeconds(finalTime.toLong()) -
                         TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(finalTime.toLong())))
-        seekBar.progress = startTime
+
             Handler().postDelayed(updateSongTime, 1000)
         }
 

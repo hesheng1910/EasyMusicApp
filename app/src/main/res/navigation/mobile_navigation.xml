@@ -16,10 +16,10 @@
         android:name="com.example.easymusicapp.ui.favourites.FavouriteFragment"
         android:label="@string/menu_favourites"
         tools:layout="@layout/fragment_favourites" />
-
     <fragment
-        android:id="@+id/nav_setting"
-        android:name="com.example.easymusicapp.ui.songplaying.SongPlayingFragment"
-        android:label="@string/menu_setting"
+        android:id="@+id/settingFragment"
+        android:name="com.example.easymusicapp.ui.setting.SettingFragment"
+        android:label="fragment_setting"
         tools:layout="@layout/fragment_setting" />
+
 </navigation>

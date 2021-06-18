@@ -1,10 +1,5 @@
 package com.example.easymusicapp
 
-import android.app.Notification
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import com.google.android.material.navigation.NavigationView
@@ -20,11 +15,8 @@ import androidx.appcompat.widget.Toolbar
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
-    companion object
-    {
-        lateinit var drawerLayout: DrawerLayout
-        lateinit var notificationManager: NotificationManager
-    }
+    lateinit var drawerLayout: DrawerLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -36,11 +28,9 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
 
         appBarConfiguration = AppBarConfiguration(setOf(                            // Init App Bar
-                R.id.nav_home, R.id.nav_favourites, R.id.nav_setting), drawerLayout)
+                R.id.nav_home, R.id.nav_favourites, R.id.settingFragment), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)         // Set up Navigation
         navView.setupWithNavController(navController)
-
-        notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager     //
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -52,4 +42,5 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
+
 }
